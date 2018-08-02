@@ -36,35 +36,41 @@ class ECCTest(unittest.TestCase):
 				Point(x,y,a,b)
 
 	def test_add_Point(self):
+		# add a point to another point
 		p1 = Point(2,5,5,7)
 		p2 = Point(-1,-1,5,7)
 		p3 = Point(3,-7,5,7)
 		self.assertEqual(p1+p2,p3)
+
+		# add a point to itself
+		p4 = Point(-1.1100000000000003,0.2870000000000008,5,7)
+		self.assertEqual(p1+p1,p4)
 
 	def test_add_Point_over_FF(self):
 		a = FieldElement(0,223)
 		b = FieldElement(7,223)
 		x1 = FieldElement(192,223)
 		y1 = FieldElement(105,223)
+		p1 = Point(x1,y1,a,b)
+		#p1+p1
+
 		x2 = FieldElement(17,223)
 		y2 = FieldElement(56,223)
-		p1 = Point(x1,y1,a,b)
 		p2 = Point(x2,y2,a,b)
+
 		x3 = FieldElement(170,223)
 		y3 = FieldElement(142,223)
 		p3 = Point(x3,y3,a,b)
 		self.assertEqual(p1+p2,p3)
 
-		x1 = FieldElement(170,223)
-		y1 = FieldElement(142,223)
-		x2 = FieldElement(60,223)
-		y2 = FieldElement(139,223)
-		p1 = Point(x1,y1,a,b)
-		p2 = Point(x2,y2,a,b)
-		x3 = FieldElement(220,223)
-		y3 = FieldElement(181,223)
-		p3 = Point(x3,y3,a,b)
-		self.assertEqual(p1+p2,p3)
+		x4 = FieldElement(60,223)
+		y4 = FieldElement(139,223)
+		p4 = Point(x4,y4,a,b)
+
+		x5 = FieldElement(220,223)
+		y5 = FieldElement(181,223)
+		p5 = Point(x5,y5,a,b)
+		self.assertEqual(p3+p4,p5)
 	
 
 # alternatively, run this in command prompt: py -3.5 test_ecc.py

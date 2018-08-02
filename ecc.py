@@ -1,3 +1,5 @@
+import math
+
 class FieldElement:
 	
 	def __init__(self, num, prime):
@@ -56,9 +58,18 @@ class Point:
 		self.b = b
 		self.x = x
 		self.y = y
+		
+		# special case
 		if self.x is None and self.y is None:
 			return
-		if self.y**2 != self.x**3 + self.a * self.x + self.b:
+
+		# check that point is on curve
+		LHS = self.y**2
+		RHS = self.x**3 + self.a * self.x + self.b
+		if isinstance(LHS,FieldElement): #convert from FieldElement to float for math.isclose()
+			LHS = LHS.num
+			RHS = RHS.num
+		if not math.isclose(LHS, RHS):
 			raise ValueError('Point ({},{}) is not on the curve where a,b={},{}'.format(x,y,a,b))
 
 	def __eq__(self, other):
@@ -80,13 +91,19 @@ class Point:
 			x = s**2 - self.x - other.x
 			y = s*(self.x - x) - self.y
 			return self.__class__(x, y, self.a, self.b)
+		if self == other and self.y == self.zero:
+			return self.__class__(None, None, self.a, self.b)
 		if self.x == other.x and self.y == other.y:
+			print('type(self.x) = '+str(type(self.x))) #TODO clean up here
 			s = (3*self.x**2 + self.a)/(2*self.y)
 			x = s**2 - 2*self.x
 			y = s*(self.x - x) - self.y
 			return self.__class__(x, y, self.a, self.b)
-		if self == other and self.y == self.zero:
-			return self.__class__(None, None, self.a, self.b)
 		if self.x == other.x:
 			return self.__class__(None, None, self.a, self.b)
 
+	def __rmul__(self, coefficient):
+		product = self.__class__(None,None,self.a,self.b)
+		for _ in range(coefficient):
+			product += self
+		return product
