@@ -52,7 +52,6 @@ class ECCTest(unittest.TestCase):
 		x1 = FieldElement(192,223)
 		y1 = FieldElement(105,223)
 		p1 = Point(x1,y1,a,b)
-		#p1+p1
 
 		x2 = FieldElement(17,223)
 		y2 = FieldElement(56,223)
@@ -71,6 +70,11 @@ class ECCTest(unittest.TestCase):
 		y5 = FieldElement(181,223)
 		p5 = Point(x5,y5,a,b)
 		self.assertEqual(p3+p4,p5)
+
+		x6 = FieldElement(49,223)
+		y6 = FieldElement(71,223)
+		p6 = Point(x6,y6,a,b)
+		self.assertEqual(p1+p1,p6)
 	
 
 # alternatively, run this in command prompt: py -3.5 test_ecc.py

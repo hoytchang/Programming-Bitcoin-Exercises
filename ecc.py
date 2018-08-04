@@ -9,7 +9,10 @@ class FieldElement:
 		self.prime = prime
 	
 	def __eq__(self, other):
-		return self.num == other.num and self.prime == other.prime
+		if isinstance(other,FieldElement):
+			return self.num == other.num and self.prime == other.prime
+		else:
+			return False
 	
 	def __ne__(self, other):
 		return self.num != other.num or self.prime != other.prime
@@ -48,6 +51,10 @@ class FieldElement:
 		num1_FE = self.__class__(num1, self.prime)
 		num2_FE = self * num1_FE
 		return num2_FE
+
+	def __rmul__(self, coefficient):
+		c = FieldElement(coefficient,self.prime)
+		return self * c
 
 class Point:
 
@@ -94,7 +101,6 @@ class Point:
 		if self == other and self.y == self.zero:
 			return self.__class__(None, None, self.a, self.b)
 		if self.x == other.x and self.y == other.y:
-			print('type(self.x) = '+str(type(self.x))) #TODO clean up here
 			s = (3*self.x**2 + self.a)/(2*self.y)
 			x = s**2 - 2*self.x
 			y = s*(self.x - x) - self.y
