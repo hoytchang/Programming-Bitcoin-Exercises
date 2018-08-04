@@ -4,10 +4,9 @@ from ecc import FieldElement, Point
 prime = 223
 a = FieldElement(0,prime)
 b = FieldElement(7,prime)
-x = FieldElement(192,prime)
-y = FieldElement(105,prime)
-p1 = Point(x,y,a,b)
-for n in range(1,22):
-	print(n)
-	pn = n*p1 #TODO fix unspported operand type for *: int and Point
-	print(pn)
+x = FieldElement(47,prime)
+y = FieldElement(71,prime)
+p = Point(x,y,a,b)
+for s in range(1,21):
+	result = s*p
+	print('{}*(47,71) = ({},{})'.format(s,result.x.num,result.y.num))

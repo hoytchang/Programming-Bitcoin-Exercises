@@ -113,3 +113,14 @@ class Point:
 		for _ in range(coefficient):
 			product += self
 		return product
+
+	#def __rmul__(self, coefficient):
+	#	self.bits = math.ceil(math.log(coefficient,2))
+	#	current = self
+	#	result = Point(None,None,self.a,self.b)
+	#	for _ in range(self.bits):
+	#		if coefficient & 1:
+	#			result += current
+	#		current += current
+	#		coefficient >>= 1
+	#	return result

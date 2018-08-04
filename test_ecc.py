@@ -76,6 +76,23 @@ class ECCTest(unittest.TestCase):
 		p6 = Point(x6,y6,a,b)
 		self.assertEqual(p1+p1,p6)
 	
+	def test_Point_scalar_multiply(self):
+		prime = 223
+		a = FieldElement(0,prime)
+		b = FieldElement(7,prime)
+		x = FieldElement(47,prime)
+		y = FieldElement(71,prime)
+		p = Point(x,y,a,b)
+
+		x6 = FieldElement(139,prime)
+		y6 = FieldElement(137,prime)
+		p6 = Point(x6,y6,a,b)
+		result = 6*p
+		self.assertEqual(result,p6)
+
+		result = 21*p
+		self.assertEqual(result.x,None)
+		self.assertEqual(result.y,None)
 
 # alternatively, run this in command prompt: py -3.5 test_ecc.py
 if __name__ == '__main__':
