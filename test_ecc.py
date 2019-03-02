@@ -12,6 +12,13 @@ class ECCTest(unittest.TestCase):
 		with self.assertRaises(RuntimeError):
 			b+c
 
+	def test_pow_FE(self):
+		a = FieldElement(17,31)
+		b = -3
+		c = pow(a,b)
+		d = FieldElement(29,31)
+		self.assertEqual(c,d)
+
 	def test_on_curve(self):
 		prime = 223
 		a = FieldElement(0,prime)

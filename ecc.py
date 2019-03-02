@@ -4,11 +4,14 @@ class FieldElement:
 	
 	def __init__(self, num, prime):
 		if num < 0 or num >= prime:
-			raise ValueError('num should be between 0 and {}-1'.format(prime))
+			error = 'Num {} not in field range 0 to {}'.format(num,prime-1)
+			raise ValueError(error)
 		self.num = num
 		self.prime = prime
 	
 	def __eq__(self, other):
+		if other is None:
+			return False
 		if isinstance(other,FieldElement):
 			return self.num == other.num and self.prime == other.prime
 		else:
