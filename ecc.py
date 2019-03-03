@@ -89,7 +89,14 @@ class Point:
 		return self.a != other.a or self.b != other.b or self.x != other.x or self.y != other.y
 
 	def __repr__(self):
-		return 'Point ({},{}) on curve a,b={},{}'.format(self.x, self.y, self.a, self.b)
+		if self.x is None:
+			return 'Point(infinity)'
+		elif isinstance(self.x, FieldElement):
+			return 'Point({},{})_{}_{} FieldElement({})'.format(
+				self.x.num, self.y.num, self.a.num, self.b.num, self.x.prime)
+		else:
+			return 'Point({},{})_{}_{}'.format(self.x, self.y, self.a, self.b)
+		#return 'Point ({},{}) on curve a,b={},{}'.format(self.x, self.y, self.a, self.b)
 
 	def __add__(self, other):
 		if self.x is None:
