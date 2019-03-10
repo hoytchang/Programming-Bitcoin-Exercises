@@ -1,5 +1,5 @@
 # to run this in command prompt: py -3.5 -m unittest test_ecc.py
-from ecc import FieldElement, Point
+from ecc import FieldElement, Point, S256Point, G, N
 import unittest
 
 class ECCTest(unittest.TestCase):
@@ -100,6 +100,10 @@ class ECCTest(unittest.TestCase):
 		result = 21*p
 		self.assertEqual(result.x,None)
 		self.assertEqual(result.y,None)
+
+	def test_nG_on_secp256k1(self):
+		inf = S256Point(None, None)
+		self.assertEqual(N*G, inf)
 
 # alternatively, run this in command prompt: py -3.5 test_ecc.py
 if __name__ == '__main__':
