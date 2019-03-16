@@ -1,7 +1,7 @@
 # chapter 3 example 9 verify a signature
 from ecc import S256Point, G, N
 
-# z, the has of the thing signed
+# z, the hash of the thing signed
 z = 0xbc62d4b80d9e36da29c16c5d4d9f11731f36052c72401a76c23c0fb5a9b74423
 
 # (r,s), the signature

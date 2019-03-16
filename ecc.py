@@ -217,7 +217,7 @@ class PrivateKey:
 	
 	def sign(self, z):
 		k = self.deterministic_k(z) # choose a random k
-		r = (k*G).x.num # calcualte R = kG, and r = x-coordinate of R
+		r = (k*G).x.num # calculate R = kG, and r = x-coordinate of R
 		k_inv = pow(k, N-2, N) # fermat's little theorem, N is prime
 		s = (z+r*self.secret) * k_inv % N # calculate s = (z+re)/k
 		#using low-s value will get nodes to relay our transactions.  For malleability.
